@@ -26,7 +26,7 @@ class Config(object):
 
         # about the optimization
         self.num_epochs = 100
-        self.batch_size = 32
+        self.batch_size = 16
         self.optimizer = 'Adam'    # 'Adam', 'RMSProp', 'Momentum' or 'SGD'
         self.initial_learning_rate = 0.0001
         self.learning_rate_decay_factor = 1.0
@@ -42,26 +42,26 @@ class Config(object):
 
         # about the saver
         self.save_period = 1000
-        self.save_dir = './models/bias_SGD_0.005_500_Adam_0.0001/'
+        self.save_dir = '/output/models/'
         self.summary_period = 100
-        self.summary_dir = './summary/bias_SGD_0.005_500_Adam_0.0001/'
+        self.summary_dir = '/output/summary/'
 
         # about the vocabulary
-        self.vocabulary_file = './vocabulary.csv'
+        self.vocabulary_file = '/data/zisang0210/flickr8k-ann/vocabulary-flickr.csv'
         self.vocabulary_size = 5000
 
         # about the training
         self.dataset = 'flickr'
-        self.caption_file =  '/data/zshwu/flickr8k/Flickr8k.token.txt'
+        self.caption_file =  '/prev-output/Flickr8k.token.txt'
         
-        self.train_image_dir = '/data/zshwu/flickr8k/Flicker8k_Dataset'
-        self.train_image_file = '/data/zshwu/flickr8k/Flickr_8k.trainImages.txt'
-        self.temp_annotation_file = './train/anns_flickr.csv'
-        self.temp_data_file = './train/data_flickr.npy'
+        self.train_image_dir = '/prev-output/Flicker8k_Dataset'
+        self.train_image_file = '/prev-output/Flickr_8k.trainImages.txt'
+        self.temp_annotation_file = '/data/zisang0210/flickr8k-ann/anns_flickr.csv'
+        self.temp_data_file = '/data/zisang0210/flickr8k-ann/data_flickr.npy'
 
         # about the evaluation
-        self.eval_image_dir = '/data/zshwu/flickr8k/Flicker8k_Dataset'
-        self.eval_image_file = '/data/zshwu/flickr8k/Flickr_8k.testImages.txt'
+        self.eval_image_dir = '/prev-output/Flicker8k_Dataset'
+        self.eval_image_file = '/prev-output/Flickr_8k.testImages.txt'
         self.eval_result_dir = './val/flickr-results/'
         self.eval_result_file = './val/flickr-results/results.json'
         self.save_eval_result_as_image = False
