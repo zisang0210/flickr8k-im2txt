@@ -8,7 +8,6 @@ import matplotlib.cm as cm
 import numpy as np
 import math
 from utils.misc import CaptionData, TopN, ImageLoader
-import skimage
 
 def load_image_into_numpy_array(filename):
   try:
