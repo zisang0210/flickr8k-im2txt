@@ -9,8 +9,8 @@ import json
 from tqdm import tqdm
 
 from utils.nn import NN
-from utils.coco.coco import COCO
-from utils.coco.pycocoevalcap.eval import COCOEvalCap
+# from utils.coco.coco import COCO
+# from utils.coco.pycocoevalcap.eval import COCOEvalCap
 from utils.misc import ImageLoader, CaptionData, TopN
 from inference import *
 slim = tf.contrib.slim
@@ -98,55 +98,55 @@ class BaseModel(object):
     def eval(self, sess, eval_gt_coco, eval_data, vocabulary):
         """ Evaluate the model using the COCO val2014 data. """
         print("Evaluating the model ...")
-        config = self.config
+        # config = self.config
 
-        results = []
-        if not os.path.exists(config.eval_result_dir):
-            os.mkdir(config.eval_result_dir)
+        # results = []
+        # if not os.path.exists(config.eval_result_dir):
+        #     os.mkdir(config.eval_result_dir)
 
-        # for perplexity calculation
-        sum_losses = 0
-        sum_length = 0
+        # # for perplexity calculation
+        # sum_losses = 0
+        # sum_length = 0
 
-        # Generate the captions for the images
-        idx = 0
-        for k in tqdm(list(range(eval_data.num_batches)), desc='batch'):
-            batch = eval_data.next_batch()
-            caption_data = self.beam_search(sess, batch, vocabulary)
+        # # Generate the captions for the images
+        # idx = 0
+        # for k in tqdm(list(range(eval_data.num_batches)), desc='batch'):
+        #     batch = eval_data.next_batch()
+        #     caption_data = self.beam_search(sess, batch, vocabulary)
 
-            fake_cnt = 0 if k<eval_data.num_batches-1 \
-                         else eval_data.fake_count
-            for l in range(eval_data.batch_size-fake_cnt):
-                word_idxs = caption_data[l][0].sentence
-                score = caption_data[l][0].score
-                sum_losses += score
-                sum_length += len(word_idxs)
-                caption = vocabulary.get_sentence(word_idxs)
-                results.append({'image_id': eval_data.image_ids[idx].item(),
-                                'caption': caption})
-                idx += 1
+        #     fake_cnt = 0 if k<eval_data.num_batches-1 \
+        #                  else eval_data.fake_count
+        #     for l in range(eval_data.batch_size-fake_cnt):
+        #         word_idxs = caption_data[l][0].sentence
+        #         score = caption_data[l][0].score
+        #         sum_losses += score
+        #         sum_length += len(word_idxs)
+        #         caption = vocabulary.get_sentence(word_idxs)
+        #         results.append({'image_id': eval_data.image_ids[idx].item(),
+        #                         'caption': caption})
+        #         idx += 1
 
-                # Save the result in an image file, if requested
-                if config.save_eval_result_as_image:
-                    image_file = batch[l]
-                    image_name = image_file.split(os.sep)[-1]
-                    image_name = os.path.splitext(image_name)[0]
-                    img = plt.imread(image_file)
-                    plt.imshow(img)
-                    plt.axis('off')
-                    plt.title(caption)
-                    plt.savefig(os.path.join(config.eval_result_dir,
-                                             image_name+'_result.jpg'))
+        #         # Save the result in an image file, if requested
+        #         if config.save_eval_result_as_image:
+        #             image_file = batch[l]
+        #             image_name = image_file.split(os.sep)[-1]
+        #             image_name = os.path.splitext(image_name)[0]
+        #             img = plt.imread(image_file)
+        #             plt.imshow(img)
+        #             plt.axis('off')
+        #             plt.title(caption)
+        #             plt.savefig(os.path.join(config.eval_result_dir,
+        #                                      image_name+'_result.jpg'))
 
-        print("perplexity", -sum_losses / sum_length)
-        fp = open(config.eval_result_file, 'w')
-        json.dump(results, fp)
-        fp.close()
+        # print("perplexity", -sum_losses / sum_length)
+        # fp = open(config.eval_result_file, 'w')
+        # json.dump(results, fp)
+        # fp.close()
 
         # Evaluate these captions
-        eval_result_coco = eval_gt_coco.loadRes(config.eval_result_file)
-        scorer = COCOEvalCap(eval_gt_coco, eval_result_coco)
-        scorer.evaluate()
+        # eval_result_coco = eval_gt_coco.loadRes(config.eval_result_file)
+        # scorer = COCOEvalCap(eval_gt_coco, eval_result_coco)
+        # scorer.evaluate()
         print("Evaluation complete.")
 
     def test(self, sess, test_data, vocabulary):
