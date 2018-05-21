@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from utils.coco.coco import COCO
+# from utils.coco.coco import COCO
 from utils.flickr import FLICKR
 from utils.vocabulary import Vocabulary
 
@@ -106,25 +106,26 @@ def prepare_train_data(config):
 
 def prepare_eval_data(config):
     """ Prepare the data for evaluating the model. """
-    coco = COCO(config.eval_caption_file)
-    image_ids = list(coco.imgs.keys())
-    image_files = [os.path.join(config.eval_image_dir,
-                                coco.imgs[image_id]['file_name'])
-                                for image_id in image_ids]
+    # coco = COCO(config.eval_caption_file)
+    # image_ids = list(coco.imgs.keys())
+    # image_files = [os.path.join(config.eval_image_dir,
+    #                             coco.imgs[image_id]['file_name'])
+    #                             for image_id in image_ids]
 
-    print("Building the vocabulary...")
-    if os.path.exists(config.vocabulary_file):
-        vocabulary = Vocabulary(config.vocabulary_size,
-                                config.vocabulary_file)
-    else:
-        vocabulary = build_vocabulary(config)
-    print("Vocabulary built.")
-    print("Number of words = %d" %(vocabulary.size))
+    # print("Building the vocabulary...")
+    # if os.path.exists(config.vocabulary_file):
+    #     vocabulary = Vocabulary(config.vocabulary_size,
+    #                             config.vocabulary_file)
+    # else:
+    #     vocabulary = build_vocabulary(config)
+    # print("Vocabulary built.")
+    # print("Number of words = %d" %(vocabulary.size))
 
-    print("Building the dataset...")
-    dataset = DataSet(image_ids, image_files, config.batch_size)
-    print("Dataset built.")
-    return coco, dataset, vocabulary
+    # print("Building the dataset...")
+    # dataset = DataSet(image_ids, image_files, config.batch_size)
+    # print("Dataset built.")
+    # return coco, dataset, vocabulary
+    return None,None,None
 
 def prepare_test_data(config):
     """ Prepare the data for testing the model. """
