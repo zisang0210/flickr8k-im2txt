@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import string
-from nltk.tokenize import word_tokenize
+# from nltk.tokenize import word_tokenize
 
 class Vocabulary(object):
     def __init__(self, size, save_file=None):
@@ -17,9 +17,9 @@ class Vocabulary(object):
     def build(self, sentences):
         """ Build the vocabulary and compute the frequency of each word. """
         word_counts = {}
-        for sentence in tqdm(sentences):
-            for w in word_tokenize(sentence.lower()):
-                word_counts[w] = word_counts.get(w, 0) + 1.0
+        # for sentence in tqdm(sentences):
+        #     for w in word_tokenize(sentence.lower()):
+        #         word_counts[w] = word_counts.get(w, 0) + 1.0
 
         assert self.size-1 <= len(word_counts.keys())
         self.words.append('<start>')
