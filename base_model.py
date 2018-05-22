@@ -285,8 +285,9 @@ class BaseModel(object):
         prev_3_path = os.path.join(config.save_dir, 
             "%s.npy"%str(global_step - 3*config.save_period))
         if os.path.isfile(prev_3_path):
+            print("rm %s"%prev_3_path)
             os.system("rm %s"%prev_3_path)
-            
+
         info_file = open(os.path.join(config.save_dir, "config.pickle"), "wb")
         config_ = copy.copy(config)
         config_.global_step = global_step
