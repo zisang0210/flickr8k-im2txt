@@ -52,16 +52,16 @@ class Config(object):
 
         # about the training
         self.dataset = 'flickr'
-        self.caption_file =  '/prev-output/Flickr8k.token.txt'
+        self.caption_file =  '/output/Flickr8k_text/Flickr8k.token.txt'
         
-        self.train_image_dir = '/prev-output/Flicker8k_Dataset'
-        self.train_image_file = '/prev-output/Flickr_8k.trainImages.txt'
+        self.train_image_dir = '/output/Flickr8k_Dataset/Flicker8k_Dataset/'
+        self.train_image_file = '/output/Flickr8k_text/Flickr_8k.trainImages.txt'
         self.temp_annotation_file = '/data/zisang0210/flickr8k-ann/anns_flickr.csv'
         self.temp_data_file = '/data/zisang0210/flickr8k-ann/data_flickr.npy'
 
         # about the evaluation
-        self.eval_image_dir = '/prev-output/Flicker8k_Dataset'
-        self.eval_image_file = '/prev-output/Flickr_8k.testImages.txt'
+        self.eval_image_dir = '/output/Flickr8k_Dataset/Flicker8k_Dataset/'
+        self.eval_image_file = '/output/Flickr8k_text/Flickr_8k.testImages.txt'
         self.eval_result_dir = './val/flickr-results/'
         self.eval_result_file = './val/flickr-results/results.json'
         self.save_eval_result_as_image = False
