@@ -276,13 +276,20 @@ class BaseModel(object):
         """ Save the model. """
         config = self.config
         data = {v.name: v.eval() for v in tf.global_variables()}
-        save_path = os.path.join(config.save_dir, str(self.global_step.eval()))
+        global_step = self.global_step.eval()
+        save_path = os.path.join(config.save_dir, str(global_step))
 
         print((" Saving the model to %s..." % (save_path+".npy")))
         np.save(save_path, data)
+
+        prev_3_path = os.path.join(config.save_dir, 
+            "%s.npy"%str(global_step - 3*config.save_period))
+        if os.path.isfile(prev_3_path):
+            os.system("rm %s"%prev_3_path)
+            
         info_file = open(os.path.join(config.save_dir, "config.pickle"), "wb")
         config_ = copy.copy(config)
-        config_.global_step = self.global_step.eval()
+        config_.global_step = global_step
         pickle.dump(config_, info_file)
         info_file.close()
         print("Model saved.")
