@@ -6,7 +6,7 @@ class Config(object):
         self.cnn = 'rpn'               # 'vgg16' or 'resnet50'
         self.max_caption_length = 20
         self.dim_embedding = 512
-        self.num_lstm_units = 512
+        self.num_lstm_units = 384
         self.num_initalize_layers = 2    # 1 or 2
         self.dim_initalize_layer = 512
         self.num_attend_layers = 2       # 1 or 2
@@ -25,7 +25,7 @@ class Config(object):
         self.attention_loss_factor = 0.01
 
         # about the optimization
-        self.num_epochs = 100
+        self.num_epochs = 20
         self.batch_size = 16
         self.optimizer = 'Adam'    # 'Adam', 'RMSProp', 'Momentum' or 'SGD'
         self.initial_learning_rate = 0.0001
