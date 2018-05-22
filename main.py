@@ -46,8 +46,9 @@ def main(argv):
     os.system("ls -al")
     os.system("ls /")
     os.system("ls /output")
-    os.system("ls /src")
-    os.system("python src/download_flickr8k.py")
+    os.system("ls /prev-output")
+    os.system("ls /tinysrc")
+    os.system("python tinysrc/download_flickr8k.py")
     # config = Config()
     # config.phase = FLAGS.phase
     # config.train_cnn = FLAGS.train_cnn
