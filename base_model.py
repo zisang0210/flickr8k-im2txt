@@ -35,14 +35,10 @@ class BaseModel(object):
         raise NotImplementedError()
 
     def faster_rcnn_encode(self, image_file):
-        print("image_file")
-        print(image_file)
         image_name = image_file.split(os.sep)[-1]
         image_path = os.path.join(self.config.train_image_dir,image_name)
-        print("image_path")
-        print(image_path)
+
         image_np = cv2.imread(image_path)   
-        print(image_np)
         if image_np is None:
             print(image_path)         
         box, feat = self.faster_rcnn.encode(image_np)

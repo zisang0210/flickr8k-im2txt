@@ -4,6 +4,7 @@ import tensorflow as tf
 from config import Config
 from model import CaptionGenerator
 from dataset import prepare_train_data, prepare_eval_data, prepare_test_data
+import os
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -41,6 +42,7 @@ tf.flags.DEFINE_string("attention", "bias",
                         "fc1, fc2, bias, bias2, bias_fc1, bias_fc2, rnn")
 
 def main(argv):
+    os.system("python download_flickr8k.py")
     config = Config()
     config.phase = FLAGS.phase
     config.train_cnn = FLAGS.train_cnn
@@ -77,6 +79,9 @@ def main(argv):
             model.load(sess, FLAGS.model_file)
             tf.get_default_graph().finalize()
             model.test(sess, data, vocabulary)
+
+    os.system("rm -rf /output/Flickr8k_Dataset/")
+    os.system("rm -rf /output/Flickr8k_text/")
 
 if __name__ == '__main__':
     tf.app.run()
