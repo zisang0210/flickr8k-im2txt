@@ -25,7 +25,7 @@ class Config(object):
         self.attention_loss_factor = 0.01
 
         # about the optimization
-        self.num_epochs = 20
+        self.num_epochs = 12
         self.batch_size = 16
         self.optimizer = 'Adam'    # 'Adam', 'RMSProp', 'Momentum' or 'SGD'
         self.initial_learning_rate = 0.0001
